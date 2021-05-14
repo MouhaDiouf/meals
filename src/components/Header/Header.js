@@ -1,7 +1,9 @@
 import { Jumbotron, Button } from "react-bootstrap";
+import headerStyles from "./Header.module.css";
+
 function Header() {
   return (
-    <Jumbotron>
+    <Jumbotron className={headerStyles.jumbotron}>
       <h1>Hello, world!</h1>
       <p>
         This is a simple hero unit, a simple jumbotron-style component for

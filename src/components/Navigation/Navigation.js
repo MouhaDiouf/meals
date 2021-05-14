@@ -17,12 +17,12 @@ export default function Navigation() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link>
-            <Link to="/team">Team</Link>
+          <Nav.Link component={Link} to="/team">
+            {/* <Link to="/team">Team</Link> */}
           </Nav.Link>
-          <Nav.Link>
+          {/* <Nav.Link>
             <Link to="/about">About</Link>
-          </Nav.Link>
+          </Nav.Link> */}
         </Nav>
         <Form inline>
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />
