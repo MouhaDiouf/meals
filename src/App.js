@@ -32,8 +32,9 @@ function App() {
             strArea: area,
             strInstructions: instructions,
             strMealThumb: image,
+            strCategory: category,
+            strArea: area,
           } = meal;
-          console.log(meal);
           return { id, area, name, instructions, image, ingredients };
         });
         // setJoke(data);

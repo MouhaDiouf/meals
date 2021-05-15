@@ -1,5 +1,6 @@
 import "./Navigation.css";
 import { LinkContainer } from "react-router-bootstrap";
+import { useRef } from "react";
 import {
   NavDropdown,
   Navbar,
@@ -10,8 +11,11 @@ import {
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 export default function Navigation() {
+  const navContainer = useRef(null);
+  console.log(navContainer);
+
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="lg" ref={navContainer}>
       <LinkContainer to="/">
         <Navbar.Brand> Meals</Navbar.Brand>
       </LinkContainer>
