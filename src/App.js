@@ -6,11 +6,17 @@ import About from "./pages/About";
 import { Route, BrowserRouter as Router, Link, Switch } from "react-router-dom";
 import Home from "./pages/Home";
 import Search from "./components/Search/Search";
+import ReactPaginate from 'react-paginate'
 
 function App() {
   const [meals, setMeals] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0); 
+  const PER_PAGE = 10; 
+  const offset = currentPage * PER_PAGE;
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('a');
+  const mealsToShow = meals.slice(offset, offset + PER_PAGE); 
+  const pageCount = Math.ceil(meals.length / PER_PAGE)
 
   useEffect(async () => {
      fetchData();
@@ -49,7 +55,6 @@ function App() {
           };
         });
       }
-        console.log('meals Data')
         setLoading(false);
         setMeals(mealsData);
       })
@@ -65,13 +70,34 @@ function App() {
     }
     return ingredients;
   }
+  function handlePageClick({selected}){
+    setCurrentPage(selected)
+
+  }
   return (
     <Router>
       <div className="App">
         <Navigation />
         <Switch>
           <Route path="/" exact>
-            <Home loading={loading} meals={meals} setSearchTerm={setSearchTerm}/>
+            <Home loading={loading} meals={mealsToShow} setSearchTerm={setSearchTerm}/>
+            <ReactPaginate
+          previousLabel={'previous'}
+          nextLabel={'next'}
+          breakLabel={'...'}
+          breakClassName={'break-me'}
+          containerClassName={"pagination"}
+          previousLinkClassName={"previous-link"}
+          pageLinkClassName={"pagination-page-link"}
+          nextLinkClassName={"next-link"}
+          pageCount={pageCount}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={handlePageClick}
+          containerClassName={'pagination'}
+          activeClassName={'page-link-active'}
+          disabledClassName={'page-link-disabled'}
+        />
           </Route>
           <Route path="/about" exact>
             <About />
