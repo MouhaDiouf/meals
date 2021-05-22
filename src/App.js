@@ -5,25 +5,27 @@ import Navigation from "./components/Navigation/Navigation";
 import About from "./pages/About";
 import { Route, BrowserRouter as Router, Link, Switch } from "react-router-dom";
 import Home from "./pages/Home";
+import Search from "./components/Search/Search";
 
 function App() {
   const [meals, setMeals] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('a');
 
   useEffect(async () => {
-    // const promise = await fetch("https://api.chucknorris.io/jokes/random");
-    // const json = await promise.json();
-    // setLoading(false);
-    // setJoke(json);
-    fetchData();
-  }, []);
+     fetchData();
+
+  }, [searchTerm]);
 
   function fetchData() {
+    let mealsData = null; 
     setLoading(true);
     axios
-      .get("https://www.themealdb.com/api/json/v1/1/search.php?s=a")
+      .get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchTerm}`)
+      
       .then(({ data }) => {
-        const mealsData = data.meals.map((meal) => {
+        if(data.meals){
+         mealsData = data.meals.map((meal) => {
           const ingredients = extractIngredients(meal);
 
           const {
@@ -33,13 +35,23 @@ function App() {
             strInstructions: instructions,
             strMealThumb: image,
             strCategory: category,
-            strArea: area,
+            strYoutube: youtube,
           } = meal;
-          return { id, area, name, instructions, image, ingredients };
+          return {
+            id,
+            area,
+            name,
+            instructions,
+            image,
+            ingredients,
+            category,
+            youtube,
+          };
         });
-        // setJoke(data);
-        setMeals(mealsData);
+      }
+        console.log('meals Data')
         setLoading(false);
+        setMeals(mealsData);
       })
       .catch((error) => console.log(error));
   }
@@ -59,7 +71,7 @@ function App() {
         <Navigation />
         <Switch>
           <Route path="/" exact>
-            <Home loading={loading} meals={meals} />
+            <Home loading={loading} meals={meals} setSearchTerm={setSearchTerm}/>
           </Route>
           <Route path="/about" exact>
             <About />
