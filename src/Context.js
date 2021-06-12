@@ -7,7 +7,7 @@ export default function Context({children}){
     const [meals, setMeals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('a');
-  const [currentUser, setCurrentUser] = null; 
+  const [currentUser, setCurrentUser] = useState(null); 
   const [currentPage, setCurrentPage] = useState(0); 
   const PER_PAGE = 10; 
   const offset = currentPage * PER_PAGE;

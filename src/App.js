@@ -14,9 +14,13 @@ function App() {
   const {setCurrentPage, pageCount, setCurrentUser} = useContext(MealsContext)
 
   useEffect(()=>{
-
     auth.onAuthStateChanged((authUser)=>{
+      if(authUser){
         setCurrentUser(authUser)
+      } else {
+        setCurrentUser(null)
+      }
+       
     })
   }, [])
   function handlePageClick({selected}){

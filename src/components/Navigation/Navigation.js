@@ -1,5 +1,8 @@
 import "./Navigation.css";
 import { LinkContainer } from "react-router-bootstrap";
+import { useContext } from "react";
+import { MealsContext } from "../../Context";
+import {auth} from '../../firebase'
 import {
   NavDropdown,
   Navbar,
@@ -10,6 +13,11 @@ import {
 } from "react-bootstrap";
 
 export default function Navigation() {
+  const {currentUser} = useContext(MealsContext); 
+ function handleLogout(e){
+   e.preventDefault(); 
+   auth.signOut();
+ }
 
   return (
     <Navbar bg="light" expand="lg">
@@ -25,14 +33,22 @@ export default function Navigation() {
           <LinkContainer to="/about">
             <Nav.Link>About</Nav.Link>
           </LinkContainer>
-          <LinkContainer to="/login">
+{         !currentUser ? <LinkContainer to="/login">
             <Nav.Link>Login</Nav.Link>
-          </LinkContainer>
+          </LinkContainer> :  
+          
+          <LinkContainer to="#" onClick={handleLogout}>
+            <Nav.Link>Logout</Nav.Link>
+          </LinkContainer> 
+          }
+         
         </Nav>
-        <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-success">Search</Button>
-        </Form>
+        <Navbar.Collapse className="justify-content-end">
+    <Navbar.Text>
+      Signed in as: <a href="#login">Mark Otto</a>
+    </Navbar.Text>
+  </Navbar.Collapse>
+
       </Navbar.Collapse>
     </Navbar>
   );
