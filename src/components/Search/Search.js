@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useContext} from 'react'
 import {InputGroup, FormControl, Button} from 'react-bootstrap'
 import searchStyles from './Search.module.css'; 
-function Search({setSearchTerm}) {
+import {MealsContext} from '../../Context'
+function Search() {
     const [searchValue, setSearchValue] = useState('');
+    const {setSearchTerm} = useContext(MealsContext)
+
   function handleSearch(){
     setSearchTerm(searchValue)
   }

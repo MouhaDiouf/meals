@@ -1,6 +1,5 @@
 import "./Navigation.css";
 import { LinkContainer } from "react-router-bootstrap";
-import { useRef } from "react";
 import {
   NavDropdown,
   Navbar,
@@ -9,13 +8,11 @@ import {
   FormControl,
   Button,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
+
 export default function Navigation() {
-  const navContainer = useRef(null);
-  console.log(navContainer);
 
   return (
-    <Navbar bg="light" expand="lg" ref={navContainer}>
+    <Navbar bg="light" expand="lg">
       <LinkContainer to="/">
         <Navbar.Brand> Meals</Navbar.Brand>
       </LinkContainer>
@@ -27,6 +24,9 @@ export default function Navigation() {
           </LinkContainer>
           <LinkContainer to="/about">
             <Nav.Link>About</Nav.Link>
+          </LinkContainer>
+          <LinkContainer to="/login">
+            <Nav.Link>Login</Nav.Link>
           </LinkContainer>
         </Nav>
         <Form inline>

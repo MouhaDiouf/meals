@@ -1,11 +1,19 @@
 import React, {createContext} from 'react'; 
+import {useState, useEffect} from 'react'; 
+import axios from 'axios'
+ export const MealsContext = createContext();
 
-const mealsContext = createContext();
-
-function Context({children}){
+export default function Context({children}){
     const [meals, setMeals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('a');
+  const [currentUser, setCurrentUser] = null; 
+  const [currentPage, setCurrentPage] = useState(0); 
+  const PER_PAGE = 10; 
+  const offset = currentPage * PER_PAGE;
+
+  const mealsToShow = Array.isArray(meals) ? meals.slice(offset, offset + PER_PAGE) : null; 
+  const pageCount = meals ? Math.ceil(meals.length / PER_PAGE) : 0;
 
 
   useEffect(async () => {
@@ -63,6 +71,8 @@ function Context({children}){
  }
 
  
-return (<mealsContext.Provider></mealsContext.Provider>)
+return (<MealsContext.Provider value={{loading, mealsToShow, meals, setCurrentPage, pageCount,   setSearchTerm, searchTerm, currentUser, setCurrentUser}}>
+  {children}
+</MealsContext.Provider>)
 
 }

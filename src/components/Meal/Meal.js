@@ -7,7 +7,7 @@ function Meal({ meal }) {
   const handleShow = () => setShow(true);
   return (
     <>
-      <Card style={{ width: "18rem", margin: "10px 0" }}>
+      <Card style={{ width: "18rem", minWidth: "400px", margin: "10px auto" }}>
         <Card.Img variant="top" src={meal.image} />
         <Card.Body>
           <Card.Title>{meal.title}</Card.Title>
