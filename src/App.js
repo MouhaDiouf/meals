@@ -8,10 +8,12 @@ import Home from "./pages/Home";
 import ReactPaginate from 'react-paginate'; 
 import {MealsContext} from './Context'
 import Login from "./pages/Login";
+import Favorites from './pages/Favorites'; 
+import ErrorPage from "./pages/ErrorPage/ErrorPage";
 
 function App() {
 
-  const {setCurrentPage, pageCount, setCurrentUser} = useContext(MealsContext)
+  const {setCurrentPage, pageCount, setCurrentUser, currentUser} = useContext(MealsContext)
 
   useEffect(()=>{
     auth.onAuthStateChanged((authUser)=>{
@@ -59,6 +61,12 @@ function App() {
           </Route>
           <Route path="/login" exact>
             <Login />
+          </Route>
+          {currentUser &&  <Route exact path="/:id/favorites">
+            <Favorites />
+          </Route>}
+          <Route>
+            <ErrorPage />
           </Route>
         </Switch>
       </div>

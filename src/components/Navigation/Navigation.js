@@ -27,9 +27,11 @@ export default function Navigation() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <LinkContainer to="/team">
-            <Nav.Link>Team</Nav.Link>
+          { currentUser && 
+          <LinkContainer to={`/${currentUser.uid}/favorites`}>
+            <Nav.Link>Favorites</Nav.Link>
           </LinkContainer>
+}
           <LinkContainer to="/about">
             <Nav.Link>About</Nav.Link>
           </LinkContainer>
@@ -43,11 +45,13 @@ export default function Navigation() {
           }
          
         </Nav>
-        <Navbar.Collapse className="justify-content-end">
+        {currentUser && 
+      <Navbar.Collapse className="justify-content-end">
     <Navbar.Text>
-      Signed in as: <a href="#login">Mark Otto</a>
+      Signed in as: <span className="font-weight-bold">{currentUser.email}</span>
     </Navbar.Text>
   </Navbar.Collapse>
+}
 
       </Navbar.Collapse>
     </Navbar>
