@@ -3,11 +3,24 @@ import { Card, Button, Modal } from "react-bootstrap";
 import { FaYoutube } from "react-icons/fa";
 import { MealsContext } from "../../Context";
 import {db} from '../../firebase';
-function Meal({ meal }) {
+
+function Meal({ meal, isFavorite }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const {currentUser} = useContext(MealsContext);
+  const {currentUser, setShowAlert} = useContext(MealsContext);
+
+  function removeFromFavorites(){
+    if(currentUser){
+      db.collection('users')
+        .doc(currentUser.uid)
+        .collection('favorites')
+        .doc(meal.id)
+        .delete()
+        .then(()=> setShowAlert(prev => ({...prev, state: true, msg: `${meal.name} removed successfully`, variant: 'danger', type: 'remove'})))
+        .catch((e) => console.log(e))
+    }
+  }
 
   function addToFavorites(){
       if(currentUser){
@@ -17,7 +30,9 @@ function Meal({ meal }) {
         .doc(meal.id)
         .set({
           meal,
-        }).then(()=> alert('added to collection'))
+        }).then(()=> setShowAlert(prev => ({...prev, state: true, msg: `${meal.name} added successfully`, variant: 'success', type: 'add'})))
+        .catch(e => console.log(e))
+
       }
   }
   return (
@@ -25,7 +40,7 @@ function Meal({ meal }) {
       <Card style={{ width: "18rem", minWidth: "400px", margin: "10px auto" }}>
         <Card.Img variant="top" src={meal.image} />
         <Card.Body>
-          <Card.Title>{meal.title}</Card.Title>
+          <Card.Title>{meal.name}</Card.Title>
           <p class="badge bg-success"> {meal.category}</p> <br />
           <Button variant="primary" onClick={handleShow}>
             See More Details
@@ -47,11 +62,18 @@ function Meal({ meal }) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          { currentUser &&
+          { currentUser && !isFavorite &&
           <Button variant="primary" onClick={addToFavorites}>
             Add To Favorites
           </Button>
 }
+
+{ currentUser && isFavorite &&
+          <Button variant="primary" onClick={removeFromFavorites}>
+            Remove From Favorites
+          </Button>
+}
+
           <a href={meal.youtube} target="_blank" rel="noopener noreferrer">
             <FaYoutube />
           </a>

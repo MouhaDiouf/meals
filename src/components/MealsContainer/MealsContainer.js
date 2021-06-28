@@ -1,9 +1,10 @@
 import Meal from "../Meal/Meal";
 import styled from "styled-components";
 import {MealsContext} from '../../Context'
+import CustomAlert from "../Alert/CustomAlert";
 import { useContext } from "react";
 function MealsContainer() {
-  const {mealsToShow:meals} = useContext(MealsContext)
+  const {mealsToShow:meals, showAlert} = useContext(MealsContext)
   const Container = styled.div`
     display: flex;
     justify-content: space-between;
@@ -14,6 +15,8 @@ function MealsContainer() {
   `;
   return (
     <Container>
+      { showAlert.state && showAlert.type === 'add' && <CustomAlert msg={showAlert.msg} variant={showAlert.variant}/> }
+
       {meals.map((meal, idx) => (
         <Meal meal={meal} key={idx} />
       ))}
