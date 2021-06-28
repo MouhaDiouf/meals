@@ -10,6 +10,7 @@ import {MealsContext} from './Context'
 import Login from "./pages/Login";
 import Favorites from './pages/Favorites'; 
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
+import Footer from "./components/Footer/Footer";
 
 function App() {
 
@@ -69,6 +70,7 @@ function App() {
             <ErrorPage />
           </Route>
         </Switch>
+        <Footer />
       </div>
     </Router>
   );
