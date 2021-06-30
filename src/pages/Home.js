@@ -1,3 +1,4 @@
+import React from 'react'
 import Header from "../components/Header/Header";
 import MealsContainer from "../components/MealsContainer/MealsContainer";
 import {useContext} from 'react'

@@ -24,3 +24,15 @@
 .footer-right ul li a {
   text-decoration: none;
 }
+
+@media screen and (max-width: 700px) {
+  .footer {
+    display: block;
+  }
+  .footer-right ul {
+    justify-content: center;
+  }
+  .footer-left {
+    text-align: center;
+  }
+}

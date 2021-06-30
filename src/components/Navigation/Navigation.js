@@ -1,23 +1,16 @@
+import React from 'react'
 import "./Navigation.css";
 import { LinkContainer } from "react-router-bootstrap";
 import { useContext } from "react";
 import { MealsContext } from "../../Context";
-import {auth} from '../../firebase'
 import {
-  NavDropdown,
   Navbar,
-  Form,
   Nav,
-  FormControl,
-  Button,
 } from "react-bootstrap";
 
 export default function Navigation() {
-  const {currentUser} = useContext(MealsContext); 
- function handleLogout(e){
-   e.preventDefault(); 
-   auth.signOut();
- }
+  const {currentUser, handleLogout} = useContext(MealsContext); 
+ 
 
   return (
     <Navbar bg="light" expand="lg">

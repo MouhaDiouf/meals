@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import {db} from '../firebase'; 
+import React from 'react'
 import {useContext} from 'react'; 
 import {useParams, useHistory} from 'react-router-dom';
 import {MealsContext} from '../Context'
@@ -34,7 +33,7 @@ function Favorites() {
     if(favorites.length === 0){
         return (
             <div>
-                <h2>You don't have any favorites yet.</h2>
+                <h2>You don&apos;t have any favorites yet.</h2>
             </div>
         )
     }
@@ -49,7 +48,7 @@ function Favorites() {
             <h2>Your favorites</h2>
 
             <Container >
-                {favorites.map(({data}) => <Meal meal={data.meal} isFavorite={true}/>)}
+                {favorites.map(({data, idx}) => <Meal meal={data.meal} key={idx} isFavorite={true}/>)}
             </Container>
             
             </>)

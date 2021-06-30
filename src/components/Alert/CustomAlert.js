@@ -1,6 +1,8 @@
+import React from 'react';
 import {useContext } from "react";
 import {Alert} from 'react-bootstrap'; 
 import { MealsContext } from "../../Context";
+import PropTypes from 'prop-types'
 
 export default function CustomAlert({msg, variant}) {
   const {setShowAlert} = useContext(MealsContext);
@@ -17,3 +19,8 @@ export default function CustomAlert({msg, variant}) {
     
   }
   
+
+  CustomAlert.propTypes = {
+    msg: PropTypes.string, 
+    variant: PropTypes.string
+  }

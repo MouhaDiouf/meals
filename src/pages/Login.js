@@ -38,7 +38,7 @@ function Login() {
       <div className="login-inner-container">
       <Container >
         <Row>
-          <Col xs={12} md={6}>
+          <Col sm={12} md={6}>
             <Form>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
@@ -49,7 +49,7 @@ function Login() {
                   onChange={(e) => setEmail(e.target.value)}
                 />
                 <Form.Text className="text-muted">
-                  We'll never share your email with anyone else.
+                  We&apos;ll never share your email with anyone else.
                 </Form.Text>
               </Form.Group>
 
@@ -71,7 +71,7 @@ function Login() {
             </Form>
           </Col>
 
-          <Col xs={0} md={6}>
+          <Col xs={0} md={6} className="login-image-container">
             
                   <Image
                     src="https://images.unsplash.com/photo-1612392062335-300bb9bd3054?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"

@@ -1,7 +1,9 @@
 import React, {createContext} from 'react'; 
 import {useState, useEffect} from 'react'; 
-import { db } from './firebase';
+import { db, auth } from './firebase';
 import axios from 'axios'
+import PropTypes from 'prop-types'; 
+
  export const MealsContext = createContext();
 
 
@@ -51,7 +53,11 @@ export default function Context({children}){
 
     }, [currentUser]) 
 
-
+    function handleLogout(e){
+      e.preventDefault(); 
+      console.log('Handlelogout');
+      auth.signOut();
+    }
 
   useEffect( () => {
 
@@ -109,8 +115,12 @@ export default function Context({children}){
  }
 
  
-return (<MealsContext.Provider value={{loading, mealsToShow, meals, setCurrentPage, pageCount,   setSearchTerm, searchTerm, currentUser, setCurrentUser, favorites, loadingFavorites, showAlert, setShowAlert}}>
+return (<MealsContext.Provider value={{loading, mealsToShow, meals, setCurrentPage, pageCount,   setSearchTerm, searchTerm, currentUser, setCurrentUser, favorites, loadingFavorites, showAlert, setShowAlert, handleLogout}}>
   {children}
 </MealsContext.Provider>)
 
+}
+
+Context.propTypes = {
+  children: PropTypes.node.isRequired
 }

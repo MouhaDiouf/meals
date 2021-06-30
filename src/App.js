@@ -1,3 +1,4 @@
+import React from 'react'
 import "./App.css";
 import {useContext, useEffect } from "react";
 import {auth} from './firebase'
@@ -51,7 +52,6 @@ function App() {
           marginPagesDisplayed={2}
           pageRangeDisplayed={5}
           onPageChange={handlePageClick}
-          containerClassName={'pagination'}
           activeClassName={'page-link-active'}
           disabledClassName={'page-link-disabled'}
         />

@@ -1,4 +1,5 @@
-import { Jumbotron, Button, InputGroup, FormControl } from "react-bootstrap";
+import React from 'react';
+import { Jumbotron} from "react-bootstrap";
 import Search from "../Search/Search";
 import headerStyles from "./Header.module.css";
 import {MealsContext} from '../../Context'

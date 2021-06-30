@@ -1,3 +1,4 @@
+import React from 'react';
 import Meal from "../Meal/Meal";
 import styled from "styled-components";
 import {MealsContext} from '../../Context'

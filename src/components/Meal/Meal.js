@@ -1,8 +1,9 @@
-import { useState, useContext } from "react";
+import React,  { useState, useContext } from "react";
 import { Card, Button, Modal } from "react-bootstrap";
 import { FaYoutube } from "react-icons/fa";
 import { MealsContext } from "../../Context";
 import {db} from '../../firebase';
+import PropTypes from 'prop-types'
 
 function Meal({ meal, isFavorite }) {
   const [show, setShow] = useState(false);
@@ -41,7 +42,7 @@ function Meal({ meal, isFavorite }) {
         <Card.Img variant="top" src={meal.image} />
         <Card.Body>
           <Card.Title>{meal.name}</Card.Title>
-          <p class="badge bg-success"> {meal.category}</p> <br />
+          <p className="badge bg-success"> {meal.category}</p> <br />
           <Button variant="primary" onClick={handleShow}>
             See More Details
           </Button>
@@ -84,3 +85,9 @@ function Meal({ meal, isFavorite }) {
 }
 
 export default Meal;
+
+
+Meal.propTypes = {
+  isFavorite: PropTypes.bool.isRequired,
+  meal: PropTypes.instanceOf(Object).isRequired  
+}
