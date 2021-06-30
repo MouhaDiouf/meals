@@ -11,12 +11,13 @@
 - React Router
 - Eslint
 - npm
+- Firebase
 - CSS
 - React Context API
 
 ## Live Version
 
-<a href="https://appointcar.netlify.app/" target="_blank" > Live version </a>
+<a href="https://mealsdb-1dd93.web.app/" target="_blank" > Live version </a>
 
 ## Usage
 
